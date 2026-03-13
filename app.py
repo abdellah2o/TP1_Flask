@@ -1,11 +1,13 @@
 from flask import Flask
 
 from controllers.courses_controller import courses_controller
+from controllers.gives_controller import gives_controller
 from controllers.teachers_controller import teachers_controller
 
 app = Flask(__name__)
 app.register_blueprint(teachers_controller)
 app.register_blueprint(courses_controller)
+app.register_blueprint(gives_controller)
 
 
 @app.route('/')
