@@ -22,3 +22,37 @@ def add_course() -> tuple[Response, int]:
     courses_service.cgid += 1
 
     return jsonify(data), 201
+
+@courses_controller.route('/<int:course_id>', methods=['GET'])
+def access_by_id(course_id: int) -> tuple[Response, int]:
+    coursesSelected = [course for course in courses_service.courses if course['id'] == course_id]
+
+    return jsonify(coursesSelected), 200
+
+@courses_controller.route('/<int:course_id>', methods=['DELETE'])
+def delete_course(course_id: int) -> tuple[Response, int]:
+    i: int = 0
+    while i != course_id and i <= courses_service.cgid:
+        i += 1
+
+    if i <= courses_service.cgid:
+        courses_service.courses.pop(i)
+    else:
+        print("neuille")
+
+    return jsonify(courses_service.courses), 200
+
+@courses_controller.route('/<int:course_id>', methods=['PUT'])
+def update_course(course_id: int) -> tuple[Response, int]:
+    data = request.get_json()
+
+    i: int = 0
+    while i != course_id and i <= courses_service.cgid:
+        i += 1
+
+    if i <= courses_service.cgid:
+        courses_service.courses[i] = {
+            'id': courses_service.courses[i]['id'], 'name': data['name']
+        }
+
+    return jsonify(courses_service.courses), 200
