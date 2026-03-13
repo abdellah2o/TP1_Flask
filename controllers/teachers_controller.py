@@ -21,9 +21,9 @@ def add_teacher() -> tuple[Response, int]:
     data = request.get_json()
 
     teachers_service.teachers.append(
-        {'id': teachers_service.id, 'name': data['name'], 'colleagues': data['colleagues']}
+        {'id': teachers_service.tgid, 'name': data['name'], 'colleagues': data['colleagues']}
     )
-    teachers_service.id += 1
+    teachers_service.tgid += 1
 
     return jsonify(data), 201
 
@@ -53,10 +53,10 @@ def find_colleagues(teacher_id: int) -> tuple[Response, int]:
 @teachers_controller.route('/<int:teacher_id>', methods=['DELETE'])
 def delete_teacher(teacher_id: int) -> tuple[Response, int]:
     i: int = 0
-    while i != teacher_id and i <= teachers_service.id:
+    while i != teacher_id and i <= teachers_service.tgid:
         i += 1
 
-    if i <= teachers_service.id:
+    if i <= teachers_service.tgid:
         teachers_service.teachers.pop(i)
     else:
         print("neuille")
@@ -69,10 +69,10 @@ def update_teacher(teacher_id: int) -> tuple[Response, int]:
     data = request.get_json()
 
     i: int = 0
-    while i != teacher_id and i <= teachers_service.id:
+    while i != teacher_id and i <= teachers_service.tgid:
         i += 1
 
-    if i <= teachers_service.id:
+    if i <= teachers_service.tgid:
         teachers_service.teachers[i]['name'] = data['name']
         teachers_service.teachers[i]['colleagues'] = data['colleagues']
 

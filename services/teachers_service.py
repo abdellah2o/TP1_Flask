@@ -1,4 +1,4 @@
-id: int = 3
+tgid: int = 3
 
 teachers = [{'id':0, 'name':'Geoffrey', 'colleagues':[1]},
             {'id':1, 'name':'Fabien', 'colleagues':[0]},
