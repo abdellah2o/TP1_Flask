@@ -7,15 +7,32 @@
 <body>
     <header>
         <p>TP1 Flask - Teachers gestion apllication</p>
+
+        <nav class="menu">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/teachers">Teachers</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/gives">Gives</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <h3>Teachers : </h3>
+        {% block buttons %}{% endblock %}
+
+        <h3>Data : </h3>
         <ul>
-            {% for teacher in teachers -%}
-                <li>{{ teacher['id'] ~ ': ' ~ teacher['name'] }}</li>
+            {% for elem in data -%}
+                <li>
+                    {% for row, value in elem.items() -%}
+                        {{ row ~ ': ' ~ value ~ ' - ' }}
+                    {%- endfor %}
+                </li>
             {%- endfor %}
         </ul>
     </main>
+
+    <script src="/static/js/{{ jsfile }}"></script>
 </body>
 </html>

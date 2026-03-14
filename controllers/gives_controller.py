@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, Response
 from services import gives_service, teachers_service
 
-gives_controller = Blueprint('gives', __name__, url_prefix='/gives')
+gives_controller = Blueprint('gives', __name__, url_prefix='/api/gives')
 
 @gives_controller.route('', methods=['GET'])
 def find_all() -> tuple[Response, int]:

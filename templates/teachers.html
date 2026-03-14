@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+
+{% block buttons %}
+    <div>
+        <input id="teacher-name" type="text" name="teacher_name" placeholder="name">
+        <input id="teacher-colleagues" type="text" name="teacher_colleagues" placeholder="0,1,2,...">
+        <button id="add-teacher" onclick="addTeacher()">Add</button>
+    </div>
+{% endblock %}

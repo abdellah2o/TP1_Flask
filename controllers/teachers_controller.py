@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, Response
 import services.teachers_service as teachers_service
 
-teachers_controller = Blueprint('teachers', __name__, url_prefix='/teachers')
+teachers_controller = Blueprint('teachers', __name__, url_prefix='/api/teachers')
 
 
 @teachers_controller.route('', methods=['GET'])
