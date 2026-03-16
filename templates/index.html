@@ -23,15 +23,8 @@
         {% block buttons %}{% endblock %}
 
         <h3>Data : </h3>
-        <ul>
-            {% for elem in data -%}
-                <li>
-                    {% for row, value in elem.items() -%}
-                        {{ row ~ ': ' ~ value ~ ' - ' }}
-                    {%- endfor %}
-                </li>
-            {%- endfor %}
-        </ul>
+        {% block table %}{% endblock %}
+        <table id="data-table"></table>
     </main>
 
     <script src="/static/js/{{ jsfile }}"></script>

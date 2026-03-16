@@ -1,3 +1,37 @@
+// Show teachers
+function displayTeachers() {
+    const table = document.getElementById("data-table");
+
+  fetch("api/teachers")
+    .then(r => r.json())
+    .then(result => {
+      if (!result || result.length === 0) {
+        table.innerHTML = "<tr><td>Aucun résultat.</td></tr>"
+        return
+      }
+
+      const keys = Object.keys(result[0])
+      let html = "<thead><tr>"
+      keys.forEach(key =>  html += ("<th>" + key + "</th>"))
+      html += "</tr></thead>"
+
+      html += "<tbody>"
+      result.forEach(elem => {
+        html += "<tr>"
+        keys.forEach(key => {
+          html += "<td>" + elem[key] + "</td>"
+        })
+        html += "</tr>"
+      })
+      html += "</tbody>"
+
+      table.innerHTML = html
+    })
+}
+document.addEventListener("DOMContentLoaded", () => displayTeachers())
+
+
+// Add teacher
 const inputName = document.getElementById("teacher-name")
 const inputColleagues = document.getElementById("teacher-colleagues")
 
@@ -15,9 +49,10 @@ function addTeacher() {
 
     inputName.value = ''
     inputColleagues.value = ''
+    displayTeachers()
 }
 
-
+// Delete teacher
 const inputId = document.getElementById("teacher-id")
 
 function deleteTeacher() {
@@ -27,9 +62,10 @@ function deleteTeacher() {
     }))
 
     inputId.value = ''
+    displayTeachers()
 }
 
-
+// Update teacher
 const inputNamePut = document.getElementById("teacher-name-put")
 const inputColleaguesPut = document.getElementById("teacher-colleagues-put")
 const inputIdPut = document.getElementById("teacher-id-put")
@@ -46,4 +82,5 @@ function updateTeacher() {
     inputNamePut.value = ''
     inputColleaguesPut.value = ''
     inputIdPut.value = ''
+    displayTeachers()
 }
